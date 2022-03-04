@@ -1,16 +1,23 @@
 package controller;
 
 import model.Material;
-import storage.MaterialFile;
+import storage.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MaterialManager {
-    public static List<Material> materialList= MaterialFile.readFile();
+    public static IMaterialData materialData = new MaterialFormFileWord();
+    public static ArrayList<Material> materialList= materialData.readFile();
 
     public static void addNewMaterial(Material newMaterial){
         materialList.add(newMaterial);
+        try {
+            materialData.writeFile(materialList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public int getMaterialByID(String materialCode){

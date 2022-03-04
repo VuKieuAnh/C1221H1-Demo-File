@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Client {
-    private static List<Material> materialListClient = MaterialFile.readFile();
+    private static List<Material> materialListClient = MaterialManager.materialList;
 
     public static void main(String[] args) {
 //        addNewMaterial();
@@ -27,14 +27,9 @@ public class Client {
     }
 
     public static void addNewMaterial(){
-        MaterialManager.materialList = materialListClient;
         Meat meat = creatNewMeat();
         MaterialManager.addNewMaterial(meat);
-        try {
-            MaterialFile.writeFile(materialListClient);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 
     public static Meat creatNewMeat(){
